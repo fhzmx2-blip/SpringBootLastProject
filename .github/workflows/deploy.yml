@@ -74,7 +74,7 @@ jobs:
      # Add Known_hosts
      - name: Add Known_hosts
        run: |
-         ssh-keyscan -H ed25519 54.180.82.177 >> ~/.ssh/known_hosts
+         ssh-keyscan -H ed25519 15.164.214.247 >> ~/.ssh/known_hosts
      # Jar파일을 AWS 전송 => Docker이미지 
      - name: Deploy to Server with rsync 
        run: |
