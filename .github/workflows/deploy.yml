@@ -24,17 +24,7 @@ jobs:
          distribution: 'temurin'
          java-version: '21'
      # 환경 설정 
-     # DB관련 => .env 
-     - name: 환경설정
-       run: |
-          # 기존의 파일 삭제
-          rm -f .env
-          # 새로운 .env 생성 
-          touch .env
-          echo "DB_URL=${{secrets.DB_URL}}" >> .env
-          echo "DB_USERNAME=${{secrets.DB_USERNAME}}" >> .env
-          echo "DB_PASSWORD=${{secrets.DB_PASSWORD}}" >> .env
-          
+     
      # Gradlew 권한 부여 
      - name: Set gradlew permission
        run: |
@@ -73,7 +63,23 @@ jobs:
      # Add Known_hosts
      - name: Add Known_hosts
        run: |
-         ssh-keyscan -H ed25519 15.164.214.247 >> ~/.ssh/known_hosts
+         ssh-keyscan -H 15.164.214.247 >> ~/.ssh/known_hosts
+    # DB관련 => .env 
+     - name: 환경설정
+       run: |
+          ssh ubuntu@15.164.214.247 << EOF
+           # 기존의 파일 삭제
+           mkdir -p ~/app
+           cd ~/app
+           rm -f .env
+           # 새로운 .env 생성 
+           touch .env
+           echo "DB_URL=${{secrets.DB_URL}}" >> .env
+           echo "DB_USERNAME=${{secrets.DB_USERNAME}}" >> .env
+           echo "DB_PASSWORD=${{secrets.DB_PASSWORD}}" >> .env
+           chmod 600 .env
+          EOF
+          
      # Deploy on service DockerHub Image using
      - name: DockerHub Image using
        run: |
