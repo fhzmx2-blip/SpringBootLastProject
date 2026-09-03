@@ -4,7 +4,7 @@ on:
   push:
     # main으로 commit & push인 경우 
     branches:
-      - master #master commit and push = [main,master]
+      - master #main commit and push = [main,master]
 jobs:
   deploy:
     # Github Actions가 제공하는 Ubuntu환경에서 실행
@@ -83,4 +83,4 @@ jobs:
           docker rm last-app || true
           docker pull ${{secrets.DOCKERHUB_NAME}}/last-app:latest
           docker run -d --name last-app -p 9090:9090 ${{secrets.DOCKERHUB_NAME}}/last-app:latest
-       EOF
+      EOF
