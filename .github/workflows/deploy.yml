@@ -4,7 +4,7 @@ on:
   push:
     # main으로 commit & push인 경우 
     branches:
-      - master #main commit and push = [main,master]
+      - master #master commit and push = [main,master]
 jobs:
   deploy:
     # Github Actions가 제공하는 Ubuntu환경에서 실행
@@ -14,10 +14,9 @@ jobs:
     #  name = stage = step
     steps:
      # 어떤 소스를 가지고 올지 => src / build.grade gradlew Dockerfile
-     #코드 체크 (Repository)
      - name: Checkout:repository
        uses: actions/checkout@v4
-     #JDK 설정 => SpringBoot프로젝트를 build => JDK 설정 
+     # JDK 설정 => SpringBoot프로젝트를 build => JDK 설정 
      - name: SetUp JDK 21
        uses: actions/setup-java@v4
        with:
@@ -83,4 +82,4 @@ jobs:
           docker rm last-app || true
           docker pull ${{secrets.DOCKERHUB_NAME}}/last-app:latest
           docker run -d --name last-app -p 9090:9090 ${{secrets.DOCKERHUB_NAME}}/last-app:latest
-      EOF
+         EOF
