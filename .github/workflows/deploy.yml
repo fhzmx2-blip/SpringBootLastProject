@@ -23,8 +23,7 @@ jobs:
          # 가장 최소단위 JDK = 이클립스 JDK 사용
          distribution: 'temurin'
          java-version: '21'
-     # 환경 설정 
-     
+   
      # Gradlew 권한 부여 
      - name: Set gradlew permission
        run: |
